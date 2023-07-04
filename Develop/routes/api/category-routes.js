@@ -8,7 +8,9 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Products
   try{
   const categoryData = await Category.findAll({
-    include: [{model: Product}],
+    include: [
+      {model: Product, required: true}
+    ],
   });
   
   res.status(200).json(categoryData);
@@ -21,9 +23,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
-  try{
+  try{    //Search for a single instance by its primary key.
     const categoryData = await Category.findByPk(req.params.id,{
-      include: [{model: Product}],
+      include: [{model: Product, required: true}],
     });
     if(!categoryData){
       res.status(404).json({ message: "No category found with that id"});
@@ -37,9 +39,14 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   // create a new category
+    /* req.body should look like this...
+    {
+      category_name: "Basketball",
+    }
+  */
   try{
-    if(!req.body.category_name){        // validate that there is a category name
-      res.status(400).send('The category name is required');
+    if(!req.body.category_name || typeof req.body.category_name !== 'string'){        // validate that there is a category name
+      res.status(400).send('The category name is required and should be a string');
       return;
     }
     const newCategory = await Category.create({
@@ -53,12 +60,17 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
-  try{
+  try {
     if(!req.body.category_name){
-      res.status(400).send("Category name is required");
-      return;
+      return res.status(400).send("Category name is required");
     }
-    const updateCategory = await Category.update(
+    // Check if the category exists before attempting to update it
+    const category = await Category.findByPk(req.params.id);
+    if (!category) {
+      return res.status(404).json({ message: 'No category found with this id!'});
+    }
+
+    const updatedRows = await Category.update(
       {
         category_name: req.body.category_name,
       },
@@ -68,31 +80,40 @@ router.put('/:id', async (req, res) => {
         },
       }
     );
-    if(!updateCategory[0]){
-      res.status(404).json({ message: 'No category with this id!'});
-      return;
+    // update method returns an array where the first element is the number of affected rows. 
+    // This is useful to know if your update operation was successful or not.
+    if (updatedRows[0] === 0) {
+      return res.status(200).json({ message: 'There is nothing to update.'});
     }
-    res.status(200).json(updateCategory);
-  }catch(err){
-    res.status(500).json(err)
+    res.status(200).json({ message: 'Category updated successfully.'});
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try{
-    const deleteCategory = await Category.destroy({
+     // check to see if it exists
+    const category = await Category.findOne({
       where: {
-        id: req.params.id,    // delete the catogory with this id
+        id: req.params.id,
       },
     });
-    if(!deleteCategory){
-      res.status(404).json({ message: 'No category found with that id.'})
+    if (!category) {
+      res.status(404).json({ message: 'No category found with that id.'});
       return;
     }
-    res.status(200).json(deleteCategory)
+    // if it exists delete it
+    await Category.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    // return the deleted category data
+    res.status(200).json(category);
   }catch(err){
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
 });
 
