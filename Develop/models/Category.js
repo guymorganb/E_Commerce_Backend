@@ -7,7 +7,7 @@ class Category extends Model {}
 // set up fields and rules for Category model (These should match up with you schema.sql)
 Category.init(
   {
-    // this object defines the attributes of the table sequelize is connecting to inside the sql database
+    // this object defines the attributes of the table sequelize in sequel
     id: {
       // define columns
       type: DataTypes.INTEGER,

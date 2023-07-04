@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   try{
     const tagData = await Tag.findAll({
       include: [
-        {model: Product},
+        {model: Product, through: ProductTag},  // this is the equvalent of joining the tables we use the 'through' because there is no foreign key association directly insde the product or the tag (we are connecting the product to tag through the product tag)
       ]
     })
     if(!tagData){
@@ -29,7 +29,7 @@ router.get('/:id', async (req, res) => {
     // this is the data we will send back if it exists
     const tagData = await Tag.findByPk(req.params.id,{
       include: [
-        {model: Product},
+        {model: Product, through: ProductTag}, // this is the equvalent of joining the tables we use the 'through' because there is no foreign key association directly insde the product or the tag (we are connecting the product to tag through the product tag)
       ]
     })
     if(!tagData){
