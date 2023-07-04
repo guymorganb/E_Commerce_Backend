@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Category and Tag data
   try{
     const productData = await Product.findAll({
-      include: [
+      include: [ // this becomes avaliable through the use of the relationships, 
         {model: Category, required: true},
-        {model: Tag, required: true}
+        {model: Tag, required: true, through: ProductTag} //this is the equvalent of joining the tables we use the 'through' because there is no foreign key association directly insde the product or the tag (we are connecting the product to tag through the product tag)
       ]
     })
 
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
     const productData = await Product.findByPk(req.params.id,{
       include: [
         {model: Category, required: true},
-        {model: ProductTag, required: true},
+        {model: Tag, required: true, through: ProductTag}, //this is the equvalent of joining the tables we use the 'through' because there is no foreign key association directly insde the product or the tag (we are connecting the product to tag through the product tag)
       ]
     })
     // validate the id

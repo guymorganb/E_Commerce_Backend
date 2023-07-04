@@ -23,21 +23,21 @@ Category.hasMany(Product,{
 // Products belongToMany Tags (through ProductTag)
 Product.belongsToMany(Tag, {
   through: ProductTag,
-  as: 'tags', // this alias is used in queries
+  // as: 'tags', // this alias is used in queries
   foreignKey: 'product_id',
-  otherKey: 'tag_id',  //In Sequelize, when you define a many-to-many relationship with the belongsToMany method, the otherKey option specifies the foreign key for the model that you're joining through.
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
+  //otherKey: 'tag_id',  //In Sequelize, when you define a many-to-many relationship with the belongsToMany method, the otherKey option specifies the foreign key for the model that you're joining through.
+  // onDelete: 'CASCADE',
+  // onUpdate: 'CASCADE',
 });
 // Tags belongToMany Products (through ProductTag)
 
 Tag.belongsToMany(Product, {
   through: ProductTag,
-  as: 'products',   // this alias is used in queries
+  // as: 'products',   // this alias is used in queries
   foreignKey: 'tag_id',
-  otherKey: 'product_id',  //ProductTag is the "join table" or "junction table" that links the two sides of the many-to-many relationship.
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE'
+  // otherKey: 'product_id',  //ProductTag is the "join table" or "junction table" that links the two sides of the many-to-many relationship.
+  // onDelete: 'CASCADE',
+  // onUpdate: 'CASCADE'
 })
 // This sets up a many-to-many relationship between Product and Tag. 
 // The through option tells Sequelize to use the ProductTag model as the junction table. 
