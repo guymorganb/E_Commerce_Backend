@@ -5,7 +5,14 @@
 
   ## Description
   - This is the setup and routing for the backend of a make believe e-commerce business
+
+  ## Credits
+
+  - EDx Bootcamp through the University of Denver provided the starter code, guidance materials and tutoring for me to complete this project.
   
+  - Additionall I recieved help from T.A's in the classroom, my instructor and StackOverflow. I also utilized code checking tools such as ChatGPT and Bard to help me ensure my code was formatted properly, used proper syntax, and was properly structured after writing it.
+
+
   ## Screenshots
   ![Schema Models & start server](https://github.com/guymorganb/E_Commerce_Backend/blob/main/Develop/db/startServe_schemaModels.png?raw=true)
 
