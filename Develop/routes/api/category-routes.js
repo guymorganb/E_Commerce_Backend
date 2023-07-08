@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   res.status(200).json(categoryData);
   
   }catch(err){
-    res.status(500).json({messsage: "Connection error", Error: err})
+    res.status(500).json({message: "Connection error", Error: err})
   }
 });
 
@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
   // create a new category
     /* req.body should look like this...
     {
-      category_name: "Basketball",
+      "category_name": "Basketball",
     }
   */
   try{
@@ -61,8 +61,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    if(!req.body.category_name){
-      return res.status(400).send("Category name is required");
+    if(!req.body.category_name || !req.params.id){
+      return res.status(400).send("Category name and id is required");
     }
     // Check if the category exists before attempting to update it
     const category = await Category.findByPk(req.params.id);
