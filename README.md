@@ -7,15 +7,15 @@
   - This is the setup and routing for the backend of a make believe e-commerce business
   
   ## Screenshots
-  ![step 1](https://github.com/guymorganb/Employee_Manager/blob/main/utils/EmployeeManager1.png?raw=true)
+  ![Schema Models & start server](https://github.com/guymorganb/E_Commerce_Backend/blob/main/Develop/db/startServe_schemaModels.png?raw=true)
 
-  ![step 2](https://github.com/guymorganb/Employee_Manager/blob/main/utils/EmployeeManager2.png?raw=true)
+  ![NPM run seeds](https://github.com/guymorganb/E_Commerce_Backend/blob/main/Develop/db/npmRunSeeds.png?raw=true)
 
-  ![step 3](https://github.com/guymorganb/Employee_Manager/blob/main/utils/EmployeeManager3.png?raw=true)
+  ![Create Database](https://github.com/guymorganb/E_Commerce_Backend/blob/main/Develop/db/SOURCEschema.png?raw=true)
 
   ## Walkthrough Video
 
-  - [Watch the Video Here](https://drive.google.com/file/d/1-VzhY2vGBxH1iM230B_rSz0Oe7btFExz/view?usp=sharing)
+  - [Watch the Video Here](https://drive.google.com/file/d/1-Y245nGclkQc7sC5aWlBXRP3ADkYta-u/view?usp=drive_link)
 
   ## Table of Contents
   - [Installation](#installation)
@@ -27,7 +27,7 @@
   - npm i
   
   ## Usage
-  - Add/Update/View all products/categories/Tags
+  - Get/POST/PUT/DELETE products/categories/Tags
   - See walkthrough video
   
   ## Questions
