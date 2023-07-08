@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
   // create a new tag
   /* req.body should look like this...
     {
-      tag_name: "Basketball",
+      "tag_name": "computers",
     }
   */
     try{
@@ -66,8 +66,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try{
-    if(!req.body.tag_name){
-      res.status(400).send('Tag name is required')
+    if(!req.body.tag_name || !req.params.id){
+      res.status(400).send('Tag name and id is required')
       return
     }
     const tagData = await Tag.findByPk(req.params.id);
